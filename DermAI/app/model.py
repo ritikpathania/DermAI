@@ -60,7 +60,6 @@ def predict_image_impl(file_bytes: bytes) -> dict:
     # Use a context manager for the image to ensure proper resource cleanup
     with Image.open(io.BytesIO(file_bytes)) as image:
         image = image.convert("RGB")
-        image = image.resize((224, 224), Image.LANCZOS)  # Use LANCZOS for better quality resizing
 
         # Convert to array and normalize more efficiently
         img_array = np.asarray(image, dtype=np.float32) / 255.0
