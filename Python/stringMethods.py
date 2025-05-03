@@ -1,0 +1,16 @@
+myString = "hI, hOw Are You!"
+myText = "I am fine."
+print()
+print(myString)
+print()
+print(myString.upper())
+print()
+print(myString.lower())
+print()
+print(myString.title())
+print()
+print(myString.capitalize())
+print()
+print(myString.isupper())
+print()
+print(myString.islower())
