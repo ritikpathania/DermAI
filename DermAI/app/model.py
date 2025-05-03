@@ -49,7 +49,7 @@ def predict_image(file_bytes: bytes) -> dict:
 
     # Clean up the image cache if the prediction is cached
     if len(image_cache) > 100:
-        # Remove oldest entries when cache gets too large
+        # Remove the oldest entries when cache gets too large
         old_keys = list(image_cache.keys())[:-100]
         for key in old_keys:
             image_cache.pop(key, None)
