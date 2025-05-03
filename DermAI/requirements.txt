@@ -7,7 +7,9 @@ python-multipart
 pillow~=11.2.1
 numpy~=2.2.5
 tensorflow~=2.19.0
+gdown
 
 #frontend
 gradio~=5.28.0
 requests~=2.32.3
+
