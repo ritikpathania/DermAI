@@ -1,0 +1,11 @@
+# Ignore PyCharm settings
+.idea/
+
+# Ignore unnecessary directories
+BookSrore/
+FastAPI-MongoDB/
+FastAPI/
+Python/
+
+# Ignore system-specific files
+.DS_Store
