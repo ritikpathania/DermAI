@@ -113,7 +113,8 @@ def classify(image):
 # --- Load CSS from external file ---
 def load_css():
     """Load CSS from an external file"""
-    css_path = Path("app/static/styles.css")
+    base_path = Path(os.path.dirname(__file__))
+    css_path = base_path / "static" / "styles.css"
     if css_path.exists():
         return css_path.read_text()
     else:
@@ -178,5 +179,5 @@ if __name__ == "__main__":
         server_port=SERVER_PORT,
         show_error=True,
         share=os.environ.get("SHARE_APP", "false").lower() == "true",
-        favicon_path='app/static/DermAI_favicon.ico'
+        favicon_path='static/DermAI_favicon.png'
     )

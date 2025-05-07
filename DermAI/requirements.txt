@@ -5,7 +5,7 @@ python-multipart
 
 #ml
 pillow~=11.2.1
-numpy~=1.26.4
+numpy~=2.2.5
 tensorflow~=2.19.0
 gdown
 
