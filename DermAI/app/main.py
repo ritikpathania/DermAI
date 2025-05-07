@@ -1,7 +1,12 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import threading
+import uvicorn
+from .gradio_app import demo
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse
 from .model import predict_image
-import os
 import logging
 
 # Suppress TensorFlow logs (optional but recommended on Render)
@@ -56,3 +61,25 @@ async def predict(file: UploadFile = File(...)):
             status_code=400,
             detail="Failed to process the image or make a prediction. Please try again with a valid image."
         )
+
+# Function to start FastAPI in a separate thread
+def start_fastapi():
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000)  # Adjust the path if necessary
+
+# Function to start Gradio
+def start_gradio():
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=7860,
+        show_error=True,
+        share=os.environ.get("SHARE_APP", "false").lower() == "true",
+        favicon_path='app/static/DermAI_favicon.png'
+    )
+
+if __name__ == "__main__":
+    # Start FastAPI in a separate thread
+    fastapi_thread = threading.Thread(target=start_fastapi, daemon=True)
+    fastapi_thread.start()
+
+    # Start Gradio in the main thread
+    start_gradio()

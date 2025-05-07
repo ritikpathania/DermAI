@@ -3,10 +3,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Text:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=swap');
 
+/* Define CSS Variables */
+:root {
+    --font-primary: 'Google Sans Text', sans-serif;
+    --font-secondary: 'Google Sans', sans-serif;
+    --color-bg: #FDFCF4;
+    --color-text: #1C1B1F;
+    --color-primary: #6750A4;
+    --color-primary-hover: #6750b9;
+    --color-primary-active: rgba(103, 80, 164, 0.86);
+    --color-secondary: #625B71;
+    --color-success: #388E3C;
+    --color-warning: #D32F2F;
+    --color-error: #F44336;
+    --color-card-border: #79747E;
+    --color-card-bg: #E7E0EC;
+    --color-card-success-bg: #E9DDFF;
+    --color-card-warning-bg: #ff7f84;
+    --color-card-error-bg: #ff7e81;
+}
+
+/* General Styles */
 html, body, .gradio-container {
-    font-family: 'Google Sans Text', sans-serif;
-    background: #FDFCF4;
-    color: #1C1B1F;
+    font-family: var(--font-primary), serif;
+    background: var(--color-bg);
+    color: var(--color-text);
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -15,24 +36,23 @@ html, body, .gradio-container {
 }
 
 /* Header */
-h1 {
-    font-family: 'Google Sans', sans-serif;
-    font-size: 2.8rem;
-    font-weight: 700;
+h1, h2 {
     text-align: center;
-    color: #6750A4;
-    margin-top: 40px;
-    margin-bottom: 0;
+    margin: 0;
     line-height: 1.2;
 }
+h1 {
+    font-family: var(--font-secondary), serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-top: 40px;
+}
 h2 {
-    font-family: 'Google Sans Text', sans-serif;
     font-size: 1.1rem;
     font-weight: 400;
-    text-align: center;
-    color: #625B71;
+    color: var(--color-secondary);
     margin-bottom: 30px;
-    line-height: 1.4;
 }
 
 /* Wrapper for side-by-side layout */
@@ -41,101 +61,93 @@ h2 {
     gap: 30px;
     max-width: 1000px;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
 }
 .flex-child {
     flex: 1;
     min-width: 300px;
 }
 
-/* Card styling */
+/* Card Styling */
 .card {
-    background: #FDFCF4;
+    background: var(--color-card-bg);
     border-radius: 28px;
     padding: 115px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-size: 1rem;
-    margin-top: -10px;
-    transition: transform 0.3s ease;
-    border: 2px solid #79747E;
-    flex-grow: 1; /* Make the card grow to fill column height */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid var(--color-card-border);
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically */
+    justify-content: center;
 }
 .card:hover {
     transform: scale(1.01);
-    margin-top: -10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 .card.success {
-    border: 4px solid #6750A4;
-    background: #E9DDFF;
-    color: #21005E;
+    border-color: var(--color-primary);
+    background: var(--color-card-success-bg);
+    color: var(--color-primary);
 }
 .card.warning {
-    border: 4px solid #ff5256;
-    background: #ff7f84;
-    color: #51110d;
+    border-color: var(--color-warning);
+    background: var(--color-card-warning-bg);
+    color: var(--color-warning);
 }
 .card.error {
-    border: 4px solid #ff5256;
-    background: #ff7e81;
-    color: #51110d;
-}
-.card.neutral {
-    border: 4px solid #79747E;
-    background: #E7E0EC;
-    color: #49454F;
+    border-color: var(--color-error);
+    background: var(--color-card-error-bg);
+    color: var(--color-error);
 }
 .card .icon {
     font-size: 2.4rem;
     margin-bottom: 10px;
-    color: #6750A4; /* Consistent icon color */
+    color: var(--color-primary);
 }
 .card.success .icon {
-    color: #388E3C;
+    color: var(--color-success);
 }
 .card.warning .icon {
-    color: #D32F2F;
+    color: var(--color-warning);
 }
 .card.error .icon {
-    color: #F44336;
+    color: var(--color-error);
 }
-
-.confidence{
+.confidence {
     font-size: 0.8rem;
-    color: #625B71;
+    color: var(--color-secondary);
     margin-top: 4px;
 }
 
 /* Button */
 button#analyze-btn {
-    background: #6750A4;
+    margin-top: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    background: var(--color-primary);
     color: #FFFFFF;
     padding: 14px;
     border: none;
     border-radius: 28px;
     font-size: 1rem;
-    font-weight: 500; /* Medium font weight for buttons */
+    font-weight: 500;
     cursor: pointer;
-    margin-top: 12px;
     width: 100%;
     transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
-    font-family: 'Google Sans Text', sans-serif;
+    font-family: var(--font-primary), serif;
 }
 button#analyze-btn:hover {
-    background: #6750b9;
-    color: #ffffff;
-    transform: scale(1.01);
-    box-shadow: 0 4px 8px rgba(103,80,164,0.3);
+    background: var(--color-primary-hover);
+    box-shadow: 0 4px 8px rgba(103, 80, 164, 0.3);
 }
 button#analyze-btn:active {
-    background: rgba(103, 80, 164, 0.86);
-    color: #ffffff;
+    background: var(--color-primary-active);
     transform: scale(0.98);
-    box-shadow: 0 2px 4px rgba(103,80,164,0.3);
 }
-button#analyze-btn:focus {
+button#analyze-btn:focus-visible {
     outline: none;
     box-shadow: 0 0 0 4px rgba(103, 80, 164, 0.3);
 }
@@ -152,50 +164,34 @@ button#analyze-btn:focus {
 .footer {
     text-align: center;
     font-size: 0.9rem;
-    color: #625B71;
+    color: var(--color-secondary);
     padding: 20px;
     margin-top: auto;
 }
 
 /* Input (Image Upload) */
 .gradio-file-input {
+    margin: 10px 12px;
     border-radius: 28px;
-    border: 2px dashed #79747E;
-    background-color: rgba(238, 231, 255, 0.8);
-    color: #49454F;
+    border: 2px dashed var(--color-card-border);
+    background-color: rgba(231, 224, 236, 0.6);
+    color: var(--color-text);
     padding: 30px;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.2s ease, border-color 0.2s ease;
-    margin-bottom: 12px;
-    height: calc(100% - 24px); /* Match card height */
 }
-
 .gradio-file-input:hover,
 .gradio-file-input:focus {
-    background-color: #FDFCF4;
-    border-color: #6750A4;
-    outline: none;
+    background-color: rgba(231, 224, 236, 0.3);
+    border-color: var(--color-primary);
 }
 
-.gradio-file-input .file-upload-icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #6750A4;
-}
-
-.gradio-file-input .file-upload-text {
-    font-size: 0.9rem;
-}
-
-/* For larger screens, keep side-by-side layout */
+/* Media Queries */
 @media (min-width: 768px) {
     .main-wrapper {
         padding: 60px 30px;
         gap: 60px;
-    }
-    .flex-child {
-        flex: 1;
     }
     h1 {
         font-size: 3.2rem;
@@ -204,18 +200,12 @@ button#analyze-btn:focus {
         font-size: 1.2rem;
     }
 }
-
-/* Smaller screen adjustments (optional - adjust as needed) */
 @media (max-width: 767px) {
     .main-wrapper {
-        padding: 30px 15px;
-        flex-direction: column !important; /* Force column layout on small screens */
-    }
-    .flex-child {
-        width: 100%; /* Full width on small screens */
+        flex-direction: column;
     }
     h1 {
-        font-size: 2.5rem; /* Smaller heading on mobile */
+        font-size: 2.5rem;
     }
     h2 {
         font-size: 1rem;
@@ -226,10 +216,7 @@ button#analyze-btn:focus {
     .gradio-file-input {
         padding: 20px;
     }
-    .card .icon {
-        font-size: 2rem;
-    }
-    button#analyze-btn{
+    button#analyze-btn {
         font-size: 1rem;
         padding: 12px;
     }
