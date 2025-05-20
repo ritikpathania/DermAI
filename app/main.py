@@ -1,6 +1,5 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import threading
 import uvicorn
 from .gradio_app import demo
@@ -8,6 +7,8 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse
 from .model import predict_image
 import logging
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Suppress TensorFlow logs (optional but recommended on Render)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -77,9 +78,18 @@ def start_gradio():
     )
 
 if __name__ == "__main__":
-    # Start FastAPI in a separate thread
-    fastapi_thread = threading.Thread(target=start_fastapi, daemon=True)
+    # Start FastAPI in a separate thread (non-daemon so it keeps running)
+    fastapi_thread = threading.Thread(target=start_fastapi, daemon=False)
     fastapi_thread.start()
 
-    # Start Gradio in the main thread
-    start_gradio()
+    # Start Gradio in a separate thread
+    gradio_thread = threading.Thread(target=start_gradio, daemon=False)
+    gradio_thread.start()
+
+    # Keep the main thread running
+    try:
+        # This will keep the main thread alive
+        fastapi_thread.join()
+    except KeyboardInterrupt:
+        logging.info("Shutting down server...")
+        # The threads will be terminated when the main process exits
